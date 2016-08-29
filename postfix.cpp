@@ -56,7 +56,7 @@ string infix2Postfix(string sentence){
     stack<char> elems;
     string postfix = "";
 
-    for (int i = 0;i<sentence.length() -1 ;i++){
+    for (int i = 0;i<sentence.length() ;i++){
 
         if(sentence[i] == ' ' || sentence[i] == ',') continue;
 
