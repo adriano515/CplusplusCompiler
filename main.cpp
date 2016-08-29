@@ -16,14 +16,7 @@ int main(){
 
     getline(cin,sentence);
 
-    vector<char>elems = split(sentence);
-
-    cout << "Escribio : " << sentence << endl;
-
-    cout << "Cadena: " << elems[0] << endl;
-
-    cout << "Cadena: " << elems[3] << endl;
-
+    cout << "Output =" << infix2Postfix(sentence) << "\n";
     return 0;
 
 }

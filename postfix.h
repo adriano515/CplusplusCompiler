@@ -9,5 +9,17 @@ using namespace std;
 
 vector<char> split(string sentence);
 
+int getOpWeight(char op);
+
+bool hasHigherPrec(char op1, char op2);
+
+bool isOperator(char c);
+
+bool isOperand(char c);
+
+string infix2Postfix(string sentence);
+
+
+
 
 #endif //C_COMPLIER_POSTFIX_H
