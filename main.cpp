@@ -10,6 +10,9 @@ using namespace std;
 int main(){
 
     string sentence ;
+    string postfix;
+
+
 
     cout <<"Escribir cadena ";
 
@@ -17,12 +20,16 @@ int main(){
 
     cout << "Output =" << infix2Postfix(sentence) << "\n";
 
+    postfix = infix2Postfix(sentence);
+/*
     TreeNode *root;
-
-    for (int i = 0;i<sentence.length() ;i++){
-            treeInsert(*&root, sentence[i] );
+    root = nullptr;
+    cout << postfix.length() << endl;
+    for (int i = postfix.length();i>0 ;i--){
+            treeInsert(*&root, postfix[i] );
 
     }
+*/
 
 
 
