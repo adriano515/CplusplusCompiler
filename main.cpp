@@ -2,7 +2,7 @@
 
 #include "postfix.h"
 #include "TreeNode.h"
-
+#include <stack>
 
 using namespace std;
 
@@ -12,8 +12,6 @@ int main(){
     string sentence ;
     string postfix;
 
-
-
     cout <<"Escribir cadena ";
 
     getline(cin,sentence);
@@ -21,18 +19,8 @@ int main(){
     cout << "Output =" << infix2Postfix(sentence) << "\n";
 
     postfix = infix2Postfix(sentence);
-/*
-    TreeNode *root;
-    root = nullptr;
-    cout << postfix.length() << endl;
-    for (int i = postfix.length();i>0 ;i--){
-            treeInsert(*&root, postfix[i] );
 
-    }
-*/
-
-
-
+    stack < TreeNode * > t=postfix2Tree(postfix);
 
     return 0;
 
