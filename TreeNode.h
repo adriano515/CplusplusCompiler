@@ -6,10 +6,10 @@
 #define C_COMPILER_TREENODE_H
 
 
+#include <stack>
+
 struct TreeNode;
 
-void treeInsert(TreeNode *&root, char newItem);
-
-void postorderPrint( TreeNode *root );
+stack<TreeNode*> postfix2Tree(string postfix);
 
 #endif //C_COMPILER_TREENODE_H
