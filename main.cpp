@@ -23,7 +23,7 @@ int main(){
 
     stack < TreeNode * > t=postfix2Tree(postfix);
 
-    
+
 
     return 0;
 
