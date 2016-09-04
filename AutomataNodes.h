@@ -1,0 +1,8 @@
+//
+// Created by Freddie on 9/4/2016.
+//
+
+#ifndef C_COMPILER_AUTOMATANODES_H
+#define C_COMPILER_AUTOMATANODES_H
+
+#endif //C_COMPILER_AUTOMATANODES_H
