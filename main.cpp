@@ -3,6 +3,7 @@
 #include "postfix.h"
 #include "TreeNode.h"
 #include <stack>
+#include "AutomataNode.h"
 
 using namespace std;
 
@@ -21,6 +22,8 @@ int main(){
     postfix = infix2Postfix(sentence);
 
     stack < TreeNode * > t=postfix2Tree(postfix);
+
+    
 
     return 0;
 
