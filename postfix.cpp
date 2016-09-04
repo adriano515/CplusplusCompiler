@@ -5,14 +5,6 @@
 
 using namespace std;
 
-vector<char> split(string sentence) {
-    vector<char> elems(sentence.begin(), sentence.end());
-    return elems;
-}
-
-//This would search for a ( , when found it should pop the chars '(' to ')' from the elems vector
-//and replace it with a whole string while pushing to a temporal vector
-
 int getOpWeight(char op){
     int weight = -1;
     switch (op){
