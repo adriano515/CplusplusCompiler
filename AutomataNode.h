@@ -6,7 +6,6 @@
 #define C_COMPILER_AUTOMATANODE_H
 
 #include <vector>
-#include <string>
 
 using namespace std;
 
@@ -16,8 +15,8 @@ class Transition;
 
 Automata* automataEpsilon(AutomataNode* i, vector<AutomataNode*> f);
 Automata *automataEpsilon(AutomataNode *i,AutomataNode *f);
-Automata* automataLetter(AutomataNode* i, vector<AutomataNode*> f,string letter);
-Automata *automataLetter(AutomataNode *i, AutomataNode *f, string letter);
+Automata* automataLetter(AutomataNode* i, vector<AutomataNode*> f,char letter);
+Automata *automataLetter(AutomataNode *i, AutomataNode *f, char letter);
 Automata* automataOR(Automata *a, Automata *b);
 Automata *automataAnd(Automata *a, Automata *b);
 Automata *automataKleen(Automata *a);

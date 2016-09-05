@@ -60,9 +60,9 @@ class Transition{
 private:
     AutomataNode* initial;
     AutomataNode* final;
-    string transition;
+    char transition;
 public:
-    Transition(AutomataNode* init, AutomataNode* fin, string tran){
+    Transition(AutomataNode* init, AutomataNode* fin, char tran){
         initial = init;
         final = fin;
         transition = tran;
@@ -76,7 +76,7 @@ Automata *automataEpsilon(AutomataNode *i, vector<AutomataNode *> f) {
     for(int j=0;j<f.size();j++) {
 
 
-        Transition *t = new Transition(i, f[j], "e");
+        Transition *t = new Transition(i, f[j], 'e');
 
         i->addAutomataTran(t, true);
         f[j]->addAutomataTran(t, false);
@@ -91,7 +91,7 @@ Automata *automataEpsilon(AutomataNode *i, vector<AutomataNode *> f) {
 
 Automata *automataEpsilon(AutomataNode *i, AutomataNode *f) {
     Automata *automata = new Automata();
-    Transition *t = new Transition(i, f, "e");
+    Transition *t = new Transition(i, f, 'e');
 
     i->addAutomataTran(t, true);
     f->addAutomataTran(t, false);
@@ -105,7 +105,7 @@ Automata *automataEpsilon(AutomataNode *i, AutomataNode *f) {
 }
 
 
-Automata *automataLetter(AutomataNode *i, vector<AutomataNode *> f, string letter) {
+Automata *automataLetter(AutomataNode *i, vector<AutomataNode *> f, char letter) {
     Automata *automata = new Automata();
     for(int j=0;j<f.size();j++) {
 
@@ -123,7 +123,7 @@ Automata *automataLetter(AutomataNode *i, vector<AutomataNode *> f, string lette
     return automata;
 }
 
-Automata *automataLetter(AutomataNode *i, AutomataNode *f, string letter) {
+Automata *automataLetter(AutomataNode *i, AutomataNode *f, char letter) {
     Automata *automata = new Automata();
     Transition *t = new Transition(i, f, letter);
 
