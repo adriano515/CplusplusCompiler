@@ -1,200 +1,58 @@
-#include "AutomataNode.h"
+#include "Transition.h"
 #include <vector>
 #include <string>
+#include "AutomataNode.h"
 
 using namespace std;
-class Automata{
-    AutomataNode* initial;
-    vector<AutomataNode*> final;
-public:
-    Automata(AutomataNode* init, vector<AutomataNode*> fin){
-        initial = init;
-        final = fin;
-    }
 
-    Automata(){}
+Automata *epsilonAut(AutomataNode *a, AutomataNode *b) {
 
-    void addAutomataNodes(AutomataNode* node,bool b) {
-        //where true = add initial and fals= add final
-        if (b) {
-            initial= node;
-        }
-        else{
-            final.push_back(node);
-        }
-    }
-    AutomataNode* getInitNode(){
-        return initial;
-    }
-
-    vector<AutomataNode*> getFinalNodes(){
-        return final;
-    }
-
-};
-
-
-class AutomataNode{
-private:
-    vector<Transition*> Itransitions;
-    vector<Transition*> Ftransitions;
-    int number;
-public:
-    void setAutomataNumber(int num){
-        number = num;
-    }
-
-    void addAutomataTran(Transition* t,bool b) {
-        //where true = add initial and fals= add final
-        if (b) {
-            Itransitions.push_back(t);
-        }
-        else{
-            Ftransitions.push_back(t);
-        }
-    }
-
-};
-
-class Transition{
-private:
-    AutomataNode* initial;
-    AutomataNode* final;
-    char transition;
-public:
-    Transition(AutomataNode* init, AutomataNode* fin, char tran){
-        initial = init;
-        final = fin;
-        transition = tran;
-    }
-};
-
-
-
-Automata *automataEpsilon(AutomataNode *i, vector<AutomataNode *> f) {
-    Automata *automata = new Automata();
-    for(int j=0;j<f.size();j++) {
-
-
-        Transition *t = new Transition(i, f[j], 'e');
-
-        i->addAutomataTran(t, true);
-        f[j]->addAutomataTran(t, false);
-
-        automata->addAutomataNodes(f[j], false);
-    }
-
-    automata->addAutomataNodes(i, true);
-
-    return automata;
+    Transition *t = new Transition('e', b);
+    a->addTransition(t);
+    Automata *automata = new Automata(a,b);
+    return  automata;
 }
 
-Automata *automataEpsilon(AutomataNode *i, AutomataNode *f) {
-    Automata *automata = new Automata();
-    Transition *t = new Transition(i, f, 'e');
+Automata *letterAut(AutomataNode *a, AutomataNode *b, char val) {
 
-    i->addAutomataTran(t, true);
-    f->addAutomataTran(t, false);
+    Transition *t = new Transition(val, b);
+    a->addTransition(t);
+    Automata *automata = new Automata(a,b);
+    return  automata;
+}
 
-    automata->addAutomataNodes(f, false);
+Automata *orAut(Automata *a, Automata *b) {
+    AutomataNode *initial = new AutomataNode();
+    AutomataNode *final = new AutomataNode();
 
+    epsilonAut(initial,a->getInitNode());
+    epsilonAut(initial,a->getInitNode());
 
-    automata->addAutomataNodes(i, true);
+    epsilonAut(a->getFinNode(),final);
+    epsilonAut(b->getFinNode(),final);
 
-    return automata;
+    Automata* autom = new Automata(initial,final);
+    return  autom;
+}
+
+Automata *andAutomata(Automata *a, Automata *b) {
+    epsilonAut(a->getFinNode(),b->getInitNode());
+    Automata *autom = new Automata(a->getInitNode(),b->getFinNode());
+    return autom;
 }
 
 
-Automata *automataLetter(AutomataNode *i, vector<AutomataNode *> f, char letter) {
-    Automata *automata = new Automata();
-    for(int j=0;j<f.size();j++) {
 
+Automata *kleenAutomata(Automata *a) {
+    AutomataNode *init = new AutomataNode();
+    AutomataNode *final = new AutomataNode();
 
-        Transition *t = new Transition(i, f[j], letter);
-
-        i->addAutomataTran(t, true);
-        f[j]->addAutomataTran(t, false);
-
-        automata->addAutomataNodes(f[j], false);
-    }
-
-    automata->addAutomataNodes(i, true);
-
-    return automata;
+    epsilonAut(a->getFinNode(),a->getInitNode());
+    epsilonAut(init, a->getInitNode());
+    epsilonAut(init,final);
+    epsilonAut(a->getFinNode(),final);
+    Automata* autom = new Automata(init,final);
+    return autom;
 }
-
-Automata *automataLetter(AutomataNode *i, AutomataNode *f, char letter) {
-    Automata *automata = new Automata();
-    Transition *t = new Transition(i, f, letter);
-
-    i->addAutomataTran(t, true);
-    f->addAutomataTran(t, false);
-    automata->addAutomataNodes(f, false);
-
-    automata->addAutomataNodes(i, true);
-
-    return automata;
-}
-
-
-Automata *automataOR(Automata *a, Automata *b) {
-    AutomataNode* initial = new AutomataNode(); //initial node
-    AutomataNode* uFNode = a->getInitNode(); //upper first node
-    AutomataNode* lFNode = b->getInitNode(); //lower first node
-    AutomataNode* final = new AutomataNode(); //final automata
-
-    vector<AutomataNode*> temp;
-    temp.push_back(uFNode);
-    temp.push_back(lFNode);
-
-    vector<AutomataNode*> temp2;
-    temp2 = a->getFinalNodes();
-    for (int i =0;i<b->getFinalNodes().size();i++){
-        temp2.push_back(b->getFinalNodes()[i]);
-    }
-
-    automataEpsilon(initial,temp);
-    automataEpsilon(final,temp2);
-
-    Automata* automata = new Automata(initial,temp2);
-    return automata;
-
-}
-
-Automata *automataAnd(Automata *a, Automata *b) {
-
-    Automata* automata = new Automata();
-
-    automata->addAutomataNodes(a->getInitNode(),true);
-
-    for (int i =0; i<b->getFinalNodes().size();i++){
-        automata->addAutomataNodes(b->getFinalNodes()[i],false);
-    }
-
-    return automata;
-}
-
-
-Automata *automataKleen(Automata *a) {
-
-    AutomataNode* init = new AutomataNode();
-    AutomataNode* final = new AutomataNode();
-
-    Automata* automata = new Automata();
-
-    automataEpsilon(init,a->getInitNode());
-    automataEpsilon(init,final);
-
-    for (int i =0;i<a->getFinalNodes().size();i++){
-        automataEpsilon(a->getFinalNodes()[i],final);
-        automataEpsilon(a->getFinalNodes()[i],a->getInitNode());
-    }
-
-    automata->addAutomataNodes(init,true);
-    automata->addAutomataNodes(final,false);
-
-    return automata;
-}
-
 
 
