@@ -7,8 +7,54 @@
 
 
 #include <stack>
+#include "string"
+#include "AutomataNode.h"
 
-struct TreeNode;
+class TreeNode {
+    char value;
+    TreeNode* left;
+    TreeNode* right;
+    Automata* automata;
+
+public:
+    TreeNode(char elem){
+        value = elem;
+        left = nullptr;
+        right  = nullptr;
+    }
+
+    void setRight(TreeNode* newRight){
+        right = newRight;
+    }
+
+    void setLeft(TreeNode* newLeft){
+        left = newLeft;
+    }
+
+    void setValue(char elem){
+        value = elem;
+    }
+
+    void setAutomata(Automata* autom){
+        automata= autom;
+    }
+
+    Automata* getAutomata(){
+        return automata;
+    }
+
+    TreeNode* getLeft(){
+        return left;
+    }
+
+    TreeNode* getRight(){
+        return right;
+    }
+    char getValue(){
+        return value;
+    }
+
+};
 
 stack<TreeNode*> postfix2Tree(string postfix);
 

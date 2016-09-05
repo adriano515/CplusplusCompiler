@@ -2,33 +2,9 @@
 #include <iostream>
 #include <stack>
 #include "postfix.h"
+#include "TreeNode.h"
 
 using namespace std;
-
-struct TreeNode {
-    char value;
-    TreeNode* left;
-    TreeNode* right;
-
-    TreeNode(char elem){
-        value = elem;
-        left = nullptr;
-        right  = nullptr;
-    }
-
-    void setRight(TreeNode* newRight){
-        right = newRight;
-    }
-
-    void setLeft(TreeNode* newLeft){
-        left = newLeft;
-    }
-
-    void setValue(char elem){
-        value = elem;
-    }
-
-};
 
 //Stack para los operandos
 //Stack para los subarboles (solo se meteria el nodo padre)
