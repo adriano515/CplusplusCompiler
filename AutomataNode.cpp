@@ -125,7 +125,7 @@ Automata *automataLetter(AutomataNode *i, vector<AutomataNode *> f, string lette
 
 Automata *automataLetter(AutomataNode *i, AutomataNode *f, string letter) {
     Automata *automata = new Automata();
-    Transition *t = new Transition(i, f[j], letter);
+    Transition *t = new Transition(i, f, letter);
 
     i->addAutomataTran(t, true);
     f->addAutomataTran(t, false);
