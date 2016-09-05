@@ -2,11 +2,11 @@
 
 #include "postfix.h"
 #include "TreeNode.h"
-#include <stack>
 #include "AutomataNode.h"
+#include "NFAgenerator.h"
+#include "Transition.h"
 
 using namespace std;
-
 
 int main(){
 
@@ -23,7 +23,9 @@ int main(){
 
     stack < TreeNode * > t=postfix2Tree(postfix);
 
+    TreeNode* tree = t.top();
 
+    nfaGen(t.top());
 
     return 0;
 
