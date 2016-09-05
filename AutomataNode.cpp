@@ -71,7 +71,7 @@ public:
 
 
 
-Automata *epsilon(AutomataNode *i, vector<AutomataNode *> f) {
+Automata *automataEpsilon(AutomataNode *i, vector<AutomataNode *> f) {
     Automata *automata = new Automata();
     for(int j=0;j<f.size();j++) {
 
@@ -89,7 +89,23 @@ Automata *epsilon(AutomataNode *i, vector<AutomataNode *> f) {
     return automata;
 }
 
-Automata *letter(AutomataNode *i, vector<AutomataNode *> f, string letter) {
+Automata *automataEpsilon(AutomataNode *i, AutomataNode *f) {
+    Automata *automata = new Automata();
+    Transition *t = new Transition(i, f, "e");
+
+    i->addAutomataTran(t, true);
+    f->addAutomataTran(t, false);
+
+    automata->addAutomataNodes(f, false);
+
+
+    automata->addAutomataNodes(i, true);
+
+    return automata;
+}
+
+
+Automata *automataLetter(AutomataNode *i, vector<AutomataNode *> f, string letter) {
     Automata *automata = new Automata();
     for(int j=0;j<f.size();j++) {
 
@@ -107,8 +123,21 @@ Automata *letter(AutomataNode *i, vector<AutomataNode *> f, string letter) {
     return automata;
 }
 
+Automata *automataLetter(AutomataNode *i, AutomataNode *f, string letter) {
+    Automata *automata = new Automata();
+    Transition *t = new Transition(i, f[j], letter);
 
-AutomataNode *automataOR(Automata *a, Automata *b) {
+    i->addAutomataTran(t, true);
+    f->addAutomataTran(t, false);
+    automata->addAutomataNodes(f, false);
+
+    automata->addAutomataNodes(i, true);
+
+    return automata;
+}
+
+
+Automata *automataOR(Automata *a, Automata *b) {
     AutomataNode* initial = new AutomataNode(); //initial node
     AutomataNode* uFNode = a->getInitNode(); //upper first node
     AutomataNode* lFNode = b->getInitNode(); //lower first node
@@ -124,10 +153,48 @@ AutomataNode *automataOR(Automata *a, Automata *b) {
         temp2.push_back(b->getFinalNodes()[i]);
     }
 
-    epsilon(initial,temp);
-    epsilon(final,temp2);
+    automataEpsilon(initial,temp);
+    automataEpsilon(final,temp2);
 
     Automata* automata = new Automata(initial,temp2);
+    return automata;
 
 }
+
+Automata *automataAnd(Automata *a, Automata *b) {
+
+    Automata* automata = new Automata();
+
+    automata->addAutomataNodes(a->getInitNode(),true);
+
+    for (int i =0; i<b->getFinalNodes().size();i++){
+        automata->addAutomataNodes(b->getFinalNodes()[i],false);
+    }
+
+    return automata;
+}
+
+
+Automata *automataKleen(Automata *a) {
+
+    AutomataNode* init = new AutomataNode();
+    AutomataNode* final = new AutomataNode();
+
+    Automata* automata = new Automata();
+
+    automataEpsilon(init,a->getInitNode());
+    automataEpsilon(init,final);
+
+    for (int i =0;i<a->getFinalNodes().size();i++){
+        automataEpsilon(a->getFinalNodes()[i],final);
+        automataEpsilon(a->getFinalNodes()[i],a->getInitNode());
+    }
+
+    automata->addAutomataNodes(init,true);
+    automata->addAutomataNodes(final,false);
+
+    return automata;
+}
+
+
 
