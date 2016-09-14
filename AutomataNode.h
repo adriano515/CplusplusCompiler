@@ -26,6 +26,14 @@ public:
     void addTransition(Transition* t){
         transitions.push_back(t);
     }
+
+    void setNumber(int num){
+        number = num;
+    }
+
+    int getNumber(){
+        return number;
+    }
 };
 
 class Automata{
