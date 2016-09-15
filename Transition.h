@@ -21,6 +21,10 @@ public:
     char getValue(){
         return value;
     }
+
+    AutomataNode* getNextNode(){
+        return nextNode;
+    }
 };
 
 
