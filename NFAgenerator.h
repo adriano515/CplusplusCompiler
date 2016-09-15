@@ -8,6 +8,6 @@
 #include "AutomataNode.h"
 #include "TreeNode.h"
 
-Automata* nfaGen(TreeNode* current);
+Automata* nfaGen(TreeNode* current, int *counter);
 
 #endif //C_COMPILER_NFAGENERATOR_H
