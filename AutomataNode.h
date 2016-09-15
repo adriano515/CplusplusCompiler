@@ -34,6 +34,10 @@ public:
     int getNumber(){
         return number;
     }
+
+    bool operator<( const AutomataNode& other ) const{
+        return (number)<other.number;
+    }
 };
 
 class Automata{
@@ -46,6 +50,10 @@ public:
         fin = final;
     }
 
+    void setInitAutomataNode(AutomataNode* node){
+        init = node;
+    }
+
     AutomataNode* getInitNode(){
         return init;
     }
@@ -55,9 +63,9 @@ public:
 
 };
 
-Automata* epsilonAut(AutomataNode *a,AutomataNode *b);
-Automata* letterAut(AutomataNode* a,AutomataNode* b, char val);
-Automata* orAut (Automata *a,Automata *b);
+Automata* epsilonAut(AutomataNode *a, AutomataNode *b);
+Automata* letterAut(AutomataNode* a, AutomataNode* b, char val);
+Automata* orAut (Automata *a, Automata *b);
 Automata *andAutomata (Automata *a, Automata *b);
 Automata *kleenAutomata(Automata *a);
 
