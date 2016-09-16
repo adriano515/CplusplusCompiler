@@ -13,6 +13,7 @@ int main(){
 
     string sentence ;
     string postfix;
+    string text;
 
     cout <<"Escribir cadena ";
 
@@ -29,8 +30,15 @@ int main(){
     int *num = &tnum;
     Automata *a = nfaGen(t.top(), num);
 
-    set<AutomataNode*> s = eClosure(a->getInitNode());
+    cout <<"Escribir cadena a verificar ";
 
+    getline(cin, text);
+    if (nfaSimulation(text,a)==true){
+        cout << "El resultado es: si se acepta la cadena" << endl;
+    }
+    else if(nfaSimulation(text,a)==false) {
+        cout << "El resultado es: no se acepta la cadena" << endl;
+    }
     return 0;
 
 }
