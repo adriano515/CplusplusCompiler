@@ -2,9 +2,7 @@
 
 #include "postfix.h"
 #include "TreeNode.h"
-#include "AutomataNode.h"
 #include "NFAgenerator.h"
-#include "Transition.h"
 #include "NFAsimulation.h"
 
 using namespace std;

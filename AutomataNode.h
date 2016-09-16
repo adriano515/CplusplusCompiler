@@ -6,7 +6,6 @@
 #define C_COMPILER_AUTOMATANODE_H
 
 #include <vector>
-
 #include <iostream>
 #include "Transition.h"
 

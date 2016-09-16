@@ -1,6 +1,5 @@
 
 #include <string>
-#include <vector>
 #include <stack>
 
 using namespace std;
@@ -84,5 +83,3 @@ string infix2Postfix(string sentence){
 
     return postfix;
 }
-
-

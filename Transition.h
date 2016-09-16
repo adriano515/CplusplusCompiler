@@ -27,5 +27,4 @@ public:
     }
 };
 
-
 #endif //C_COMPILER_TRANSITION_H

@@ -3,10 +3,7 @@
 //
 
 #include "NFAgenerator.h"
-#include "AutomataNode.h"
-#include "TreeNode.h"
 #include "postfix.h"
-
 
 Automata *nfaGen(TreeNode *current, int *counter) {
 

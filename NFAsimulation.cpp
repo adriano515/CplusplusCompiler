@@ -1,19 +1,13 @@
 
 #include "NFAsimulation.h"
 #include <array>
-#include <stack>
-#include "AutomataNode.h"
-#include <set>
-#include <string>
 #include <algorithm>
 
 using namespace std;
 
-
 set<AutomataNode*> nodeSet; //global variable for the NFAset on e-closure of single nodes (is cleared on eClosure of sets)
 
 set<AutomataNode*> nodeSet2;// global variable for the NFAset on e-closure for a set of NFAnodes (is cleared on eClosure of sets)
-
 
 //set of NFA states reachable from NFA state s on epsilon-transitions alone
 set<AutomataNode*> eClosure(AutomataNode* s){
@@ -32,6 +26,7 @@ set<AutomataNode*> eClosure(AutomataNode* s){
 
 }
 
+//set of NFA states reachable from NFA states s on epsilon-transitions alone
 set<AutomataNode*> eClosure(set<AutomataNode*> s) {
 
 
@@ -51,6 +46,7 @@ set<AutomataNode*> eClosure(set<AutomataNode*> s) {
     return nodeSet3;
 }
 
+//set of NFA states reachable from NFA states s on transition c
 set<AutomataNode*> move(set<AutomataNode*> s, char c){
     set<AutomataNode*> nodeSet3;
     for (set<AutomataNode *>::iterator it2 = s.begin(); it2 != s.end(); it2++) {

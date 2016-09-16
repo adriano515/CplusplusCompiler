@@ -6,14 +6,16 @@
 
 using namespace std;
 
-//Stack para los operandos
-//Stack para los subarboles (solo se meteria el nodo padre)
+/*
+Stack for operands
+Stack for subtrees (only root nodes woudl be in here)
 
-//Revisar de izq a derecha
-//Si es operando pushearlo al stack
-//Si es operador verificar si es kleen , si no es popear dos operandos del stack, si es popear 1
-//Si solo se logro popear 1 operando ir al stack de arbol y popear un arbol
-//si no se popeo nada ir al stack de arbol y popear 2 arboles
+check left to right
+if operand push to stack
+if operator check if it's kleen , if not then pop two operands from stack, if it is then pop 1
+if there was only 1 popped operand go to subtree stack and pop a subtree
+if there was nothing to pop go to subtree stack and pop 2 subtrees
+*/
 
 stack <TreeNode*> postfix2Tree(string postfix){
 
@@ -115,4 +117,3 @@ stack <TreeNode*> postfix2Tree(string postfix){
     }
     return subTree;
 }
-

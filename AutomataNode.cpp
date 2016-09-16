@@ -1,7 +1,4 @@
 #include "Transition.h"
-#include <vector>
-#include <string>
-#include "AutomataNode.h"
 
 using namespace std;
 
@@ -44,8 +41,6 @@ Automata *andAutomata(Automata *a, Automata *b) {
     return autom;
 }
 
-
-
 Automata *kleenAutomata(Automata *a) {
     AutomataNode *init = new AutomataNode();
     AutomataNode *final = new AutomataNode();
@@ -57,5 +52,3 @@ Automata *kleenAutomata(Automata *a) {
     Automata* autom = new Automata(init, final);
     return autom;
 }
-
-
