@@ -6,5 +6,5 @@
 #define C_COMPILER_NFA2DFA_H
 
 #include "AutomataNode.h"
-Automata Nfa2Dfa(Automata* nfa, string language);
+AutomataDfa Nfa2Dfa(Automata* nfa, string language);
 #endif //C_COMPILER_NFA2DFA_H
