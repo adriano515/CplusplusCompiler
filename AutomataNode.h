@@ -17,6 +17,7 @@ class AutomataNode{
 private:
     vector<Transition*> transitions;
     int number;
+    bool final;
 public:
     vector<Transition*> getTransition(){
         return transitions;
@@ -37,6 +38,40 @@ public:
     bool operator<( const AutomataNode& other ) const{
         return (number)<other.number;
     }
+
+    void setFinal(bool bo){
+        final = bo;
+    }
+
+    bool getFinal(){
+        return final;
+    }
+};
+
+class AutomataDfa{
+private:
+    AutomataNode* init;
+    vector<AutomataNode*> fin;
+public:
+    AutomataDfa(AutomataNode* initial){
+        init = initial;
+    }
+
+    void setInitAutomataNode(AutomataNode* node){
+        init = node;
+    }
+
+    void addFinNode(AutomataNode* node){
+        fin.push_back(node);
+    }
+
+    AutomataNode* getInitNode(){
+        return init;
+    }
+    vector<AutomataNode*> getFinNode(){
+        return fin;
+    }
+
 };
 
 class Automata{
@@ -51,6 +86,10 @@ public:
 
     void setInitAutomataNode(AutomataNode* node){
         init = node;
+    }
+
+    void setFinalAutomataNode(AutomataNode* node){
+        fin = node;
     }
 
     AutomataNode* getInitNode(){
