@@ -3,16 +3,13 @@
 //
 
 #include "Nfa2Dfa.h"
-#include "AutomataNode.h"
-#include <vector>
 #include <set>
-#include "NFAsimulation.h"
+#include "Simulation.h"
 #include <algorithm>
 
 using namespace std;
 
-
-AutomataDfa Nfa2Dfa(Automata* nfa, string language){
+AutomataDfa* Nfa2Dfa(Automata* nfa, string language){
     //counter for amount of new sets on DFA
     int counter = 0;
     //contains the sets of each node on DFA
@@ -71,9 +68,5 @@ AutomataDfa Nfa2Dfa(Automata* nfa, string language){
     }
 
     dfa->setInitAutomataNode(nodes[0]);
+    return dfa;
 }
-
-
-
-
-
