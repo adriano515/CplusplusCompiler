@@ -1,5 +1,5 @@
 
-#include "NFAsimulation.h"
+#include "Simulation.h"
 #include <array>
 #include <algorithm>
 
@@ -63,6 +63,30 @@ set<AutomataNode*> move(set<AutomataNode*> s, char c){
 bool nfaSimulation(string text,Automata* a) {
     set<AutomataNode*> final;
     final.insert(a->getFinNode());
+
+    set<AutomataNode *> set2 = eClosure(a->getInitNode());
+    set<AutomataNode *> set3;
+
+    for (int i = 0; i < text.size(); i++) {
+        set3 = move(set2, text[i]);
+        set2 = eClosure(set3);
+    }
+    set<AutomataNode*> intersect;
+    set_intersection(set2.begin(),set2.end(),final.begin(),final.end(),inserter(intersect,intersect.begin()));
+
+    if (intersect.empty()){
+        return false;
+    }
+    return true;
+}
+
+
+bool dfaSimulation(string text,AutomataDfa* a) {
+    set<AutomataNode*> final;
+    a->getFinNode().size();
+    for (int i = 0; i<a->getFinNode().size();i++){
+        final.insert(a->getFinNode()[i]);
+    }
 
     set<AutomataNode *> set2 = eClosure(a->getInitNode());
     set<AutomataNode *> set3;

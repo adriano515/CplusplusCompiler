@@ -16,4 +16,5 @@ set<AutomataNode*> eClosure(AutomataNode* s);
 set<AutomataNode*> eClosure(set<AutomataNode*> s);
 set<AutomataNode*> move(set<AutomataNode*> s, char c);
 bool nfaSimulation(string text,Automata* a);
+bool dfaSimulation(string text,AutomataDfa* a);
 #endif //C_COMPILER_NFASIMULATION_H
