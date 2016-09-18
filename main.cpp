@@ -3,7 +3,7 @@
 #include "postfix.h"
 #include "TreeNode.h"
 #include "NFAgenerator.h"
-#include "NFAsimulation.h"
+#include "Simulation.h"
 #include "Nfa2Dfa.h"
 
 using namespace std;
@@ -37,18 +37,29 @@ int main(){
 
     int tnum =0;
     int *num = &tnum;
-    Automata *a = nfaGen(t.top(), num);
-
+    Automata *nfa = nfaGen(t.top(), num);
+    AutomataDfa *dfa = Nfa2Dfa(nfa,language);
+    vector<AutomataNode*> f = dfa->getFinNode();
+    /*
     cout <<"Escribir cadena a verificar ";
-    /*getline(cin, text);
-    if (nfaSimulation(text,a)==true){
-        cout << "El resultado es: si se acepta la cadena" << endl;
+
+    getline(cin, text);
+    if (nfaSimulation(text,nfa)==true){
+        cout << "El resultado con nfa es: si se acepta la cadena" << endl;
     }
-    else if(nfaSimulation(text,a)==false) {
-        cout << "El resultado es: no se acepta la cadena" << endl;
+    else if(nfaSimulation(text,nfa)==false) {
+        cout << "El resultado con nfa es: no se acepta la cadena" << endl;
     }
     */
-    Nfa2Dfa(a,language);
+    cout <<"Escribir cadena a verificar ";
+    getline(cin, text);
+
+    if (dfaSimulation(text,dfa)==true){
+        cout << "El resultado con dfa es: si se acepta la cadena" << endl;
+    }
+    else if(dfaSimulation(text,dfa)==false) {
+        cout << "El resultado con dfa es: no se acepta la cadena" << endl;
+    }
 
     return 0;
 
