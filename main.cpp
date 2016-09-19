@@ -5,6 +5,7 @@
 #include "NFAgenerator.h"
 #include "Simulation.h"
 #include "Nfa2Dfa.h"
+#include "tree2Dfa.h"
 
 using namespace std;
 
@@ -39,7 +40,7 @@ int main(){
     int *num = &tnum;
     Automata *nfa = nfaGen(t.top(), num);
     AutomataDfa *dfa = Nfa2Dfa(nfa,language);
-    vector<AutomataNode*> f = dfa->getFinNode();
+
     /*
     cout <<"Escribir cadena a verificar ";
 
@@ -60,6 +61,14 @@ int main(){
     else if(dfaSimulation(text,dfa)==false) {
         cout << "El resultado con dfa es: no se acepta la cadena" << endl;
     }
+
+    nullable(t.top());
+    firstPos(t.top());
+    lastPos(t.top());
+    followPos(t.top());
+
+    tree2Dfa(t.top(),language);
+
 
     return 0;
 
