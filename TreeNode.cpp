@@ -104,11 +104,18 @@ stack <TreeNode*> postfix2Tree(string postfix){
                     subTree.pop();
 
                     subTree.push(new TreeNode(postfix[i]));
-                    subTree.top()->setLeft(temp.top());
-                    temp.pop();
-                    subTree.top()->setRight(temp.top());
-                    temp.pop();
-
+                    if(postfix.size()-1==i and postfix[i]=='*' and temp.top()->getValue()=='^' ){
+                                subTree.top()->setLeft(temp.top());
+                                temp.pop();
+                                subTree.top()->setRight(temp.top());
+                                temp.pop();
+                    }
+                    else {
+                        subTree.top()->setRight(temp.top());
+                        temp.pop();
+                        subTree.top()->setLeft(temp.top());
+                        temp.pop();
+                    }
 
                 }
             }
