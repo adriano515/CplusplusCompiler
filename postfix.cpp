@@ -2,6 +2,7 @@
 #include <string>
 #include <stack>
 
+
 using namespace std;
 
 int getOpWeight(char op){
@@ -82,4 +83,36 @@ string infix2Postfix(string sentence){
     }
 
     return postfix;
+}
+
+
+string fix (string sentence2){
+    string oracion = "";
+    for (int i =0;i<sentence2.size();i++){
+
+        if(sentence2[i]=='*'){
+            oracion += string() + "^";
+        }
+
+        if(isOperand(sentence2[i]) and isOperand(sentence2[i+1])){
+            oracion += string() + sentence2[i] + "*" ;
+        }
+        if(isOperand(sentence2[i]) and sentence2[i+1] == '('){
+            oracion += string() + sentence2[i] + "*" ;
+        }
+        if(sentence2[i]==')' and isOperand(sentence2[i+1])){
+            oracion += string() + sentence2[i] + "*" ;
+        }
+        if(sentence2[i]=='*' and isOperand(sentence2[i+1])){
+            oracion += string() +"*";
+        }
+        if(sentence2[i]=='*' and sentence2[i+1]=='('){
+            oracion += string() + "*";
+        }
+
+        else if (!(sentence2[i]=='*' and sentence2[i+1]=='(') and!(sentence2[i]=='*') and!(sentence2[i]=='^' and isOperand(sentence2[i+1])) and!(isOperand(sentence2[i]) and isOperand(sentence2[i+1]))and!(isOperand(sentence2[i]) and sentence2[i+1] == '(')and!((sentence2[i]==')' and isOperand(sentence2[i+1])))){
+            oracion += string() + sentence2[i];
+        }
+    }
+    return oracion;
 }

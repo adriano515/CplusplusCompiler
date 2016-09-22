@@ -16,4 +16,6 @@ bool isOperand(char c);
 
 string infix2Postfix(string sentence);
 
+string fix(string sentence2);
+
 #endif //C_COMPLIER_POSTFIX_H
