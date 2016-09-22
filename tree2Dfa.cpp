@@ -7,6 +7,7 @@
 #include "postfix.h"
 #include <algorithm>
 #include "Transition.h"
+#include <vector>
 
 void nullable(TreeNode* t){
     if(isOperand(t->getValue())){
@@ -146,76 +147,4 @@ void lastPos(TreeNode* t){
         }
 
     }
-}
-
-AutomataDfa* tree2Dfa(TreeNode* t,string language) {
-    set<TreeNode *> t1 = t->getFirstPos();
-    set<TreeNode *> t2 = t->getLastPos();
-
-    int counter = 0;
-    int same = 0;
-    vector<set<TreeNode *>> finalSet;
-    vector<AutomataNode *> nodes;
-    finalSet.push_back(t1);
-    AutomataNode* A = new AutomataNode;
-    A->setNumber(0);
-    nodes.push_back(A);
-    AutomataDfa* dfa = new AutomataDfa(A);
-    counter = counter + 1;
-
-    for (int i = 0; i < counter; i++) { //for each new set
-        for (int k = 0; k < language.size(); k++) {//for each posible input
-            vector<TreeNode *> temp;//vector containing nodes wich came from the same input
-            set<TreeNode *> tempSet; //set of the union of followpos of temp
-
-            for (set<TreeNode *>::iterator it2 = t1.begin(); it2 != t1.end(); it2++) {//for each node in firstpos
-                TreeNode *state = *it2;
-                if (state->getValue() == language[k]) {//if its the same language
-                    temp.push_back(state);
-                }
-            }
-
-                for (int w = 0; temp.size(); w++) {
-                    set<TreeNode*> temp3 = temp[w]->getFollowPos();
-                    tempSet.insert(temp3.begin(),temp3.end());
-                }
-                same = 0;
-                for (int l = 0; l < finalSet.size(); l++) {
-                    if (finalSet[l] == tempSet) {
-                        same = same + 1;
-                        Transition* tran = new Transition(language[k], nodes[l]); //adding transitions to nodes already in the dfa
-                        nodes[i]->addTransition(tran);
-
-
-                    }
-                }
-
-                if (same == 0) { //is new set
-                    AutomataNode *A = new AutomataNode;
-                    A->setNumber(counter);
-                    Transition *tran = new Transition(language[k], A);
-                    nodes[i]->addTransition(tran);
-                    nodes.push_back(A);
-                    nodes[nodes.size() - 1]->setFinal(false);
-                    for (set<TreeNode *>::iterator it3 = tempSet.begin(); it3 != tempSet.end(); it3++) {
-                        TreeNode *state2 = *it3;
-                        for (set<TreeNode *>::iterator it4 = t2.begin(); it4 != t2.end(); it4++) {
-                            TreeNode *state3 = *it4;
-                            if (state2 == state3) {
-                                nodes[nodes.size() - 1]->setFinal(true);
-                                dfa->addFinNode(nodes[nodes.size()-1]);
-                            }
-                        }
-                    }
-
-                }
-
-                finalSet.push_back(tempSet);
-                counter = counter + 1; // new node was made
-
-            }
-        }
-
-    dfa->setInitAutomataNode(nodes[0]);
-    return dfa;
 }

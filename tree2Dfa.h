@@ -11,6 +11,6 @@ void nullable(TreeNode* t);
 void firstPos(TreeNode* t);
 void followPos(TreeNode* t);
 void lastPos(TreeNode* t);
-AutomataDfa* tree2Dfa(TreeNode* t,string language);
+AutomataDfa* tree2Dfa2(TreeNode* t,string language);
 
 #endif //C_COMPILER_POSTFIX2DFA_H
