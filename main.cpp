@@ -6,19 +6,23 @@
 #include "Simulation.h"
 #include "Nfa2Dfa.h"
 #include "tree2Dfa.h"
+#include "writeTxt.h"
 
 using namespace std;
 
 int main(){
 
-    string sentence ;
+    string sentence;
+    string sentence2;
     string postfix;
     string text;
     string language;
 
     cout <<"Escribir cadena ";
 
-    getline(cin, sentence);
+    getline(cin, sentence2);
+
+    sentence = fix(sentence2);
 
     cout << "Output =" << infix2Postfix(sentence) << "\n";
 
@@ -39,9 +43,13 @@ int main(){
     int tnum =0;
     int *num = &tnum;
     Automata *nfa = nfaGen(t.top(), num);
+    nfaWriter(nfa,language);
+
     AutomataDfa *dfa = Nfa2Dfa(nfa,language);
 
-    /*
+
+
+    dfaWriter(dfa,language);
     cout <<"Escribir cadena a verificar ";
 
     getline(cin, text);
@@ -51,7 +59,7 @@ int main(){
     else if(nfaSimulation(text,nfa)==false) {
         cout << "El resultado con nfa es: no se acepta la cadena" << endl;
     }
-    */
+
     cout <<"Escribir cadena a verificar ";
     getline(cin, text);
 
@@ -67,8 +75,7 @@ int main(){
     lastPos(t.top());
     followPos(t.top());
 
-    tree2Dfa(t.top(),language);
-
+   // tree2Dfa2(t.top(),language);
 
     return 0;
 
